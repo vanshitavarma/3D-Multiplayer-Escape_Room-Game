@@ -42,7 +42,7 @@ if (process.env.NODE_ENV === "production") {
     app.use(express.static(path.join(__dirname, '../client/dist')));
 
     // Any other request goes to the React app
-    app.get('*', (req, res) => {
+    app.get(/(.*)/, (req, res) => {
         res.sendFile(path.resolve(__dirname, '../client', 'dist', 'index.html'));
     });
 } else {
