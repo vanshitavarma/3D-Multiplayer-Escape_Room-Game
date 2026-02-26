@@ -19,7 +19,7 @@ export default function Lobby() {
     }, [user, navigate]);
 
     const connectToRoom = (code) => {
-        const serverUrl = `http://${window.location.hostname}:5000`;
+        const serverUrl = import.meta.env.PROD ? window.location.origin : `http://${window.location.hostname}:5000`;
         const newSocket = io(serverUrl);
 
         newSocket.on('connect', () => {

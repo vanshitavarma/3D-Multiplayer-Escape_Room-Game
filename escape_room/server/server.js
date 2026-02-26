@@ -32,9 +32,24 @@ io.on('connection', (socket) => {
     });
 });
 
-app.get('/', (req, res) => {
+app.get('/api/status', (req, res) => {
     res.send('Escape Room API is running...');
 });
+
+const path = require('path');
+if (process.env.NODE_ENV === "production") {
+    // Static files output by Vite
+    app.use(express.static(path.join(__dirname, '../client/dist')));
+
+    // Any other request goes to the React app
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, '../client', 'dist', 'index.html'));
+    });
+} else {
+    app.get('/', (req, res) => {
+        res.send('Escape Room API is running in development mode...');
+    });
+}
 
 const PORT = process.env.PORT || 5000;
 server.listen(PORT, () => console.log(`Server running on port ${PORT}`));

@@ -1,0 +1,9 @@
+{
+    "name": "escape-room-root",
+    "version": "1.0.0",
+    "description": "Root package.json for Render deployment",
+    "scripts": {
+        "build": "npm --prefix client install && npm --prefix client run build && npm --prefix server install",
+        "start": "npm --prefix server start"
+    }
+}
